@@ -11,8 +11,6 @@ net session >nul 2>&1
 if %errorLevel% == 0 (
     GOTO check_internet
 ) else (
-    echo Please run as administrator
-    pause
     exit /b
 )
 
