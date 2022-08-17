@@ -1,8 +1,8 @@
 ::KhanhNguyen9872
 @echo off
+color 71
 @setlocal enableextensions
 @cd /d "%~dp0"
-color 37
 TITLE Install auto_time - KhanhNguyen9872
 GOTO check_windows
 
@@ -17,6 +17,10 @@ if "%version%" == "10.0" (echo Windows 10) else (if "%version%" == "6.3" (echo W
 GOTO check_Permissions
 
 :check_Permissions
+sc.exe config LanmanServer start=auto >nul 2>&1
+sc.exe config W32Time start=auto >nul 2>&1
+sc.exe start LanmanServer >nul 2>&1
+sc.exe start W32Time >nul 2>&1
 net session >nul 2>&1
 if %errorLevel% == 0 (
     GOTO INSTALL

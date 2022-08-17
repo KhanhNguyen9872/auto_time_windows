@@ -7,20 +7,15 @@ set count=1
 GOTO check_Permissions
 
 :check_Permissions
+sc.exe config LanmanServer start=auto >nul 2>&1
+sc.exe config W32Time start=auto >nul 2>&1
+sc.exe start LanmanServer >nul 2>&1
+sc.exe start W32Time >nul 2>&1
 net session >nul 2>&1
-if %errorLevel% == 0 (
-    GOTO check_internet
-) else (
-    exit /b
-)
-
-:check_internet
-ping google.com -n 1 -w 5000 >nul 2>&1
 if %errorLevel% == 0 (
     GOTO CHECK_CURL
 ) else (
-    timeout 15 >nul 2>&1
-    GOTO check_internet
+    exit /b
 )
 
 :CHECK_CURL
